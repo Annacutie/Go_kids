@@ -1,0 +1,22 @@
+{%extends "base.html"%}
+{%block content%}
+
+<h1 class="quiz_heading">{{info.title}}</h1>
+<main id='main_content'>
+<p>{{info.task}}</p>
+<form class="" action='{{url_for("result")}}' method="POST">
+
+<ol>
+  {%for q in range (maths_test.questions | length)%}
+  <li> {{maths_test.questions[q]}} = <input type="number" name="q_{{q}}" required></li>
+  {%endfor%}
+  {%for a in range (maths_test.questions_2 | length)%}
+  <li> {{maths_test.questions[a]}} = <input type="number" name="a_{{a}}" required></li>
+  {%endfor%}
+</ol>
+<input type="submit" value="Mark it">
+</form>
+<a href="{{url_for('index')}}">back -> </a>
+</main>
+
+{%endblock%}
