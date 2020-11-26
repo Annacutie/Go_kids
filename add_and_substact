@@ -1,0 +1,70 @@
+from random import randint
+
+operations=["+", "-"]
+
+def caluclate(p):
+    '''
+    this function takes a string problem and solves it
+    returns answer as a number.
+
+    >>> caluclate(["2", "+", "2"])
+    4
+    '''
+    a=int(p[0])
+    sighn=p[1]
+    b=int(p[2])
+    if sighn=="+":
+        return a+b
+    elif sighn=="x":
+        return a*b
+    elif sighn=="**":
+        if b==2:
+            return a**2
+        elif b==3:
+            return a**3
+    elif sighn==":":
+        return a//b
+    elif sighn=="-":
+        return a-b
+
+def gen_answers(pr):
+    '''
+    This function uses caluclate as a tool to make
+    answer list from question list
+    >>>gen_answers([2+1, 3+6])
+     [3, 9]
+    '''
+    a=[]
+    for f in pr:
+        problem=f.split(" ")
+        aw=caluclate(problem)
+        a.append(aw)
+    return a
+
+def gen_questions(number_of_questions, sign):
+    '''
+    This function makes the question list
+    >>>gen_questions(3, +)
+    ["345 + 342", "987+  908", "450 + 129"]
+    '''
+    maths=[]
+    for i in (range(number_of_questions)):
+        if sign=="+":
+            maths.append(f"{randint(0, 5)} + {randint(0, 5)}")
+        elif sign=="-":
+            maths.append(f"{randint(3, 5)} - {randint(0, 2)}")
+    return maths
+
+
+def gen_1_operation_test(s):
+    '''
+    this function defins an operation
+    and biuld the work sheet using gen_questions
+    for help
+    >>>gen_1_operation_test(*)
+    [3*8, 7*3, 9*7]
+    '''
+    if s in operations:
+        return gen_questions(question_number, s)
+    else:
+        return gen_questions(question_number)
